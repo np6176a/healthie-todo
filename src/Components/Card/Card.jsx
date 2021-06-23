@@ -1,5 +1,6 @@
 import React from 'react'
 import PropType from 'prop-types'
+import { Draggable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 import { USER_IMG } from '../../constants'
 
@@ -40,16 +41,26 @@ const ImgCol = styled(Col)`
     }
 `
 
-export const Card = ({ user, title, description }) => (
-  <StyledCard>
-    <ImgCol>
-      <img src={USER_IMG[user]} alt={user} />
-    </ImgCol>
-    <Col>
-      <h5>{title}</h5>
-      <p>{description}</p>
-    </Col>
-  </StyledCard>
+export const Card = ({
+  id, index, user, title, description,
+}) => (
+  <Draggable draggableId={id} index={index}>
+    {(provided) => (
+      <StyledCard
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}
+      >
+        <ImgCol>
+          <img src={USER_IMG[user]} alt={user} />
+        </ImgCol>
+        <Col>
+          <h5>{title}</h5>
+          <p>{description}</p>
+        </Col>
+      </StyledCard>
+    )}
+  </Draggable>
 )
 
 Card.defaultProps = {
@@ -58,6 +69,8 @@ Card.defaultProps = {
   description: 'Your to dos go here...',
 }
 Card.propTypes = {
+  id: PropType.string.isRequired,
+  index: PropType.number.isRequired,
   title: PropType.string,
   description: PropType.node,
   user: PropType.oneOf(['bob', 'linda', 'tina', 'gene', 'louise']),
