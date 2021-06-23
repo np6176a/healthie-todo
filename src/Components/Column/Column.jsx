@@ -12,6 +12,8 @@ const StyledColumn = styled.div`
   margin: 20px 5px;
   border-radius: 2px;
   box-shadow: 0 20px 40px 0 rgb(14 23 30 / 2%);
+  display: flex;
+  flex-direction: column;
   h4 {
     margin: 0.5rem 0.5rem 10px;
   }
@@ -23,7 +25,8 @@ const CardList = styled.div`
   transition: background 0.2s ease;
   background: ${(props) => (props.isDragging ? COLORS.grayOne : '#fafafa')};
   box-sizing: border-box;
- 
+  flex-grow: 1;
+  min-height: 100px;
 `
 export const Column = ({
   id, title, cardIds, allCards,

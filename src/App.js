@@ -59,14 +59,27 @@ function App() {
     if (!destination) return
     if (destination.droppableId === source.droppableId && destination.index === source.index) return
 
-    const column = columns[source.droppableId]
-    const newCardIds = Array.from(column.cardIds)
-    newCardIds.splice(source.index, 1)
-    newCardIds.splice(destination.index, 0, draggableId)
+    const start = columns[source.droppableId]
+    const end = columns[destination.droppableId]
 
-    const newCol = { ...column, cardIds: newCardIds }
+    if (start.id === end.id) {
+      const cardIds = Array.from(start.cardIds)
+      cardIds.splice(source.index, 1)
+      cardIds.splice(destination.index, 0, draggableId)
+      const newCol = { ...start, cardIds }
 
-    setColumns({ ...columns, [newCol.id]: newCol })
+      setColumns({ ...columns, [start.id]: newCol })
+    } else {
+      const startCardIds = Array.from(start.cardIds)
+      startCardIds.splice(source.index, 1)
+      const newStartCol = { ...start, cardIds: startCardIds }
+
+      const endCardIds = Array.from(end.cardIds)
+      endCardIds.splice(destination.index, 0, draggableId)
+      const newEndCol = { ...end, cardIds: endCardIds }
+
+      setColumns({ ...columns, [start.id]: newStartCol, [end.id]: newEndCol })
+    }
   }
 
   return (
