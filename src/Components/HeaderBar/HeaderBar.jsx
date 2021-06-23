@@ -1,9 +1,10 @@
 import React from 'react'
+import PropType from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHamburger } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 import { Button } from '../Button/Button'
-import { Colors } from '../../constants'
+import { COLORS } from '../../constants'
 
 const Header = styled.header`
     display: flex;
@@ -20,7 +21,7 @@ const Col = styled.div`
     max-width: 100%;
 `
 const Logo = styled(Col)`
-    color: ${Colors.black}
+    color: ${COLORS.black}
     font-size: 1.5rem;
     font-weight: 500;
     svg {
@@ -32,17 +33,21 @@ const RightCol = styled(Col)`
     text-align: right;
 `
 
-const HeaderBar = () => (
+const HeaderBar = ({ onClick }) => (
   <Header>
     <Logo>
       <FontAwesomeIcon icon={faHamburger} />
       Bob&apos;s Burgers To Do
     </Logo>
     <RightCol>
-      <Button isIcon />
+      <Button isIcon onClick={() => onClick(true)} />
     </RightCol>
 
   </Header>
 )
+
+HeaderBar.propTypes = {
+  onClick: PropType.func.isRequired,
+}
 
 export default HeaderBar

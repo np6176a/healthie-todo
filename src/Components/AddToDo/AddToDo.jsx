@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropType from 'prop-types'
 import styled from 'styled-components'
 import { Button } from '../Button/Button'
 import { Input } from '../Input/Input'
+import { TextArea } from '../TextArea/TextArea'
+import { Select } from '../Select/Select'
+import { USERS } from '../../constants'
 
 const ModalOverlay = styled.div`
   position: absolute;
@@ -33,36 +36,49 @@ const Row = styled.div`
 `
 const ButtonRow = styled(Row)`
   justify-content: flex-end;
-  padding: 0 0.75rem;
+  padding: 1.5rem 0.75rem 0; 
+  border-top: 1px solid #eee;
+  border-radius: 0;
+  button:first-child{
+    margin-right: 10px;
+  }
 `
 
-export const AddToDo = ({ onCancel, onAdd }) => (
-  <ModalOverlay>
-    <Modal>
-      <div style={{ minHeight: '50vh' }}>
-        <Input value="" onChange={() => {}} label="Title" />
-        <div>
-          Text
-        </div>
-        <div>
-          Select
-        </div>
-      </div>
+export const AddToDo = ({ onCancel, onAdd }) => {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [assign, setAssign] = useState(USERS[0])
 
-      <ButtonRow>
-        <Button
-          onClick={onCancel}
-          primary={false}
-          label="Cancel"
-        />
-        <Button
-          onClick={onAdd}
-          label="Add To Do"
-        />
-      </ButtonRow>
-    </Modal>
-  </ModalOverlay>
-)
+  const onClickAdd = () => {
+    onAdd({ title, description, assign })
+    // close the modal
+    onCancel()
+  }
+  return (
+    <ModalOverlay>
+      <Modal>
+        <div style={{ minHeight: '50vh' }}>
+          <Input value={title} onChange={(e) => setTitle(e.target.value)} label="Title" />
+          <TextArea label="Description" onChange={(e) => setDescription(e.target.value)} value={description} />
+          <Select onChange={(e) => setAssign(e.target.value)} label="Assign" options={USERS} value={assign} />
+        </div>
+
+        <ButtonRow>
+          <Button
+            onClick={onCancel}
+            primary={false}
+            label="Cancel"
+          />
+          <Button
+            disabled={title.length === 0}
+            onClick={onClickAdd}
+            label="Add To Do"
+          />
+        </ButtonRow>
+      </Modal>
+    </ModalOverlay>
+  )
+}
 
 AddToDo.propTypes = {
   onCancel: PropType.func.isRequired,

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropType from 'prop-types'
 import styled from 'styled-components'
+import { USER_IMG } from '../../constants'
 
 const StyledCard = styled.div`
   display: flex;
@@ -11,6 +12,7 @@ const StyledCard = styled.div`
   box-shadow: 0 20px 40px 0 rgb(14 23 30 / 5%);
   h5{
     margin: 0 0 5px;
+    font-size: 1rem;
   };
   p{
     margin: 0;
@@ -30,12 +32,18 @@ const Col = styled.div`
 const ImgCol = styled(Col)`
     max-width: 50px;
     height: 50px;
+    margin-right: 10px;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `
 
-export const Card = ({ title, description }) => (
+export const Card = ({ user, title, description }) => (
   <StyledCard>
     <ImgCol>
-      Img
+      <img src={USER_IMG[user]} alt={user} />
     </ImgCol>
     <Col>
       <h5>{title}</h5>
@@ -45,10 +53,12 @@ export const Card = ({ title, description }) => (
 )
 
 Card.defaultProps = {
+  user: 'bob',
   title: 'Sample Header',
   description: 'Your to dos go here...',
 }
 Card.propTypes = {
   title: PropType.string,
   description: PropType.node,
+  user: PropType.oneOf(['bob', 'linda', 'tina', 'gene', 'louise']),
 }

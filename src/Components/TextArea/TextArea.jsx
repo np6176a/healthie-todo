@@ -10,31 +10,33 @@ const Label = styled.label`
   text-transform: uppercase;
 `
 
-const StyledInput = styled.input`
+const StyledTextArea = styled.textarea`
   border-radius: 2px;
   width: 100%;
+  height: 150px;
+  resize: none;
   padding: 8px 10px;
   background-color: #ffffff;
   border: 1px solid ${COLORS.grayOne};
   color: ${COLORS.black};
   outline: none;
   box-sizing: border-box;
-  font-family: 'Karla', sans-serif;
   margin: 5px 0 10px;
+  font-family: 'Karla', sans-serif;
   &:hover, &:focus, &:active{
     outline: none;
     border: 1px solid ${COLORS.black}; 
   }
 `
 
-export const Input = ({
+export const TextArea = ({
   label,
   value,
   onChange,
 }) => (
   <div>
     <Label>{label}</Label>
-    <StyledInput
+    <StyledTextArea
       onChange={onChange}
       value={value}
       placeholder="Some text"
@@ -42,7 +44,7 @@ export const Input = ({
   </div>
 )
 
-Input.propTypes = {
+TextArea.propTypes = {
   label: PropType.string.isRequired,
   value: PropType.string.isRequired,
   onChange: PropType.func.isRequired,

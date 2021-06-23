@@ -10,40 +10,45 @@ const Label = styled.label`
   text-transform: uppercase;
 `
 
-const StyledInput = styled.input`
+const StyledSelect = styled.select`
   border-radius: 2px;
   width: 100%;
+  resize: none;
   padding: 8px 10px;
   background-color: #ffffff;
   border: 1px solid ${COLORS.grayOne};
   color: ${COLORS.black};
   outline: none;
   box-sizing: border-box;
-  font-family: 'Karla', sans-serif;
   margin: 5px 0 10px;
+  font-family: 'Karla', sans-serif;
   &:hover, &:focus, &:active{
     outline: none;
     border: 1px solid ${COLORS.black}; 
   }
 `
 
-export const Input = ({
+export const Select = ({
   label,
   value,
+  options,
   onChange,
 }) => (
   <div>
     <Label>{label}</Label>
-    <StyledInput
+    <StyledSelect
       onChange={onChange}
       value={value}
       placeholder="Some text"
-    />
+    >
+      {options.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+    </StyledSelect>
   </div>
 )
 
-Input.propTypes = {
+Select.propTypes = {
+  options: PropType.arrayOf(PropType.object).isRequired,
   label: PropType.string.isRequired,
-  value: PropType.string.isRequired,
+  value: PropType.shape({ value: PropType.string, label: PropType.string }).isRequired,
   onChange: PropType.func.isRequired,
 }
