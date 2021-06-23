@@ -1,3 +1,10 @@
+export const Colors = {
+  black: '#0e171e',
+  primary: '#237bff',
+  grayText: '#3f4953',
+  grayOne: '#cccccc',
+}
+
 export const ColumnList = [
   {
     id: 0,

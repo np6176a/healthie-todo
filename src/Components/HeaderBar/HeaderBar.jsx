@@ -1,13 +1,14 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHamburger } from '@fortawesome/free-solid-svg-icons'
-
 import styled from 'styled-components'
+import { Button } from '../Button/Button'
+import { Colors } from '../../constants'
 
 const Header = styled.header`
     display: flex;
     background: #fff;
-    padding: 1.2rem 1rem;
+    padding: 1rem;
     align-items: center;
 `
 
@@ -19,7 +20,7 @@ const Col = styled.div`
     max-width: 100%;
 `
 const Logo = styled(Col)`
-    color: #0e171e;
+    color: ${Colors.black}
     font-size: 1.5rem;
     font-weight: 500;
     svg {
@@ -38,7 +39,7 @@ const HeaderBar = () => (
       Bob&apos;s Burgers To Do
     </Logo>
     <RightCol>
-      Add
+      <Button isIcon />
     </RightCol>
 
   </Header>
