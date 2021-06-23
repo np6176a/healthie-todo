@@ -47,10 +47,10 @@ const ButtonRow = styled(Row)`
 export const AddToDo = ({ onCancel, onAdd }) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [assign, setAssign] = useState(USERS[0])
+  const [user, setUser] = useState(USERS[0].value)
 
   const onClickAdd = () => {
-    onAdd({ title, description, assign })
+    onAdd({ title, description, user })
     // close the modal
     onCancel()
   }
@@ -60,7 +60,7 @@ export const AddToDo = ({ onCancel, onAdd }) => {
         <div style={{ minHeight: '50vh' }}>
           <Input value={title} onChange={(e) => setTitle(e.target.value)} label="Title" />
           <TextArea label="Description" onChange={(e) => setDescription(e.target.value)} value={description} />
-          <Select onChange={(e) => setAssign(e.target.value)} label="Assign" options={USERS} value={assign} />
+          <Select onChange={(e) => setUser(e.target.value)} label="Assign" options={USERS} value={user} />
         </div>
 
         <ButtonRow>

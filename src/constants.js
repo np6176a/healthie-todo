@@ -11,26 +11,6 @@ export const COLORS = {
   grayOne: '#cccccc',
 }
 
-export const ColumnList = [
-  {
-    id: 0,
-    title: 'To Do',
-    cards: [{
-      id: '0-0', title: 'Test', description: 'Test', user: 'bob',
-    }],
-  },
-  {
-    id: 1,
-    title: 'In Progress',
-    cards: [],
-  },
-  {
-    id: 2,
-    title: 'Done',
-    cards: [],
-  },
-]
-
 export const USERS = [
   {
     value: 'bob',
