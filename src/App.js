@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import styled from 'styled-components'
+import Confetti from 'react-confetti'
 import HeaderBar from './Components/HeaderBar/HeaderBar'
 import { Column } from './Components/Column/Column'
 import { AddToDo } from './Components/AddToDo/AddToDo'
+import { useShowConfetti, useWindowSize } from './hooks'
 
 const Row = styled.div`
     display: flex;
@@ -13,13 +15,22 @@ const Row = styled.div`
 `
 
 function App() {
+  const { width, height } = useWindowSize()
+  const { show, updateShow } = useShowConfetti()
   const [isOpen, setIsOpen] = useState(false)
+
   const [cards, setCards] = useState({
     'card-1': {
-      id: 'card-1', title: 'Test', description: 'Test', user: 'bob',
+      id: 'card-1',
+      title: 'Get Linda a gift',
+      description: 'Her birthday is coming up. Need to get her an awesome present.',
+      user: 'bob',
     },
     'card-2': {
-      id: 'card-2', title: 'More', description: 'Testing happens', user: 'tina',
+      id: 'card-2',
+      title: 'Write in diary',
+      description: 'Add new entry to personal diary.',
+      user: 'tina',
     },
   })
   const [columns, setColumns] = useState({
@@ -62,14 +73,16 @@ function App() {
     const start = columns[source.droppableId]
     const end = columns[destination.droppableId]
 
+    // moving card within same column
     if (start.id === end.id) {
       const cardIds = Array.from(start.cardIds)
-      cardIds.splice(source.index, 1)
-      cardIds.splice(destination.index, 0, draggableId)
+      cardIds.splice(source.index, 1) // removing
+      cardIds.splice(destination.index, 0, draggableId) // adding in new position
       const newCol = { ...start, cardIds }
 
       setColumns({ ...columns, [start.id]: newCol })
     } else {
+      // moving between columns
       const startCardIds = Array.from(start.cardIds)
       startCardIds.splice(source.index, 1)
       const newStartCol = { ...start, cardIds: startCardIds }
@@ -77,6 +90,7 @@ function App() {
       const endCardIds = Array.from(end.cardIds)
       endCardIds.splice(destination.index, 0, draggableId)
       const newEndCol = { ...end, cardIds: endCardIds }
+      updateShow(end.title)
 
       setColumns({ ...columns, [start.id]: newStartCol, [end.id]: newEndCol })
     }
@@ -87,6 +101,7 @@ function App() {
       <HeaderBar onClick={setIsOpen} />
       <Row>
         {isOpen ? <AddToDo onAdd={(val) => onAdd(val)} onCancel={() => setIsOpen(false)} /> : ''}
+        <Confetti width={width} height={height} style={{ display: show ? 'block' : 'none', transition: '0.5s ease' }} />
         <DragDropContext onDragEnd={onDragEnd}>
           {columnOrder.map((columnId) => {
             const column = columns[columnId]

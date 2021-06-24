@@ -41,6 +41,16 @@ const ImgCol = styled(Col)`
     }
 `
 
+const Tab = styled.div`
+  text-transform: capitalize;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.5rem;
+  background: #d8fdd9;
+  width: fit-content;
+  font-weight: 500;
+  margin: 1rem 0 0.2rem
+`
+
 export const Card = ({
   id, index, user, title, description,
 }) => (
@@ -57,6 +67,7 @@ export const Card = ({
         <Col>
           <h5>{title}</h5>
           <p>{description}</p>
+          <Tab>{user}</Tab>
         </Col>
       </StyledCard>
     )}

@@ -6,7 +6,7 @@ import { Card } from '../Card/Card'
 import { COLORS } from '../../constants'
 
 const StyledColumn = styled.div`
-  background: #fafafa;
+  background: #f7f4f2;
   min-height: 20vh; 
   width: 300px;
   margin: 20px 5px;
@@ -19,11 +19,11 @@ const StyledColumn = styled.div`
   }
 `
 const CardList = styled.div`
-  padding: 0.5rem 0.5rem 0;
+  padding: 0.5rem;
   width: 100%;
   height: 100%;
   transition: background 0.2s ease;
-  background: ${(props) => (props.isDragging ? COLORS.grayOne : '#fafafa')};
+  background: ${(props) => (props.isDragging ? COLORS.grayOne : '#f7f4f2')};
   box-sizing: border-box;
   flex-grow: 1;
   min-height: 100px;

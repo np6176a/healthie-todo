@@ -5,10 +5,11 @@ import gene from './static/gene.png'
 import louise from './static/louise.png'
 
 export const COLORS = {
-  black: '#0e171e',
-  primary: '#237bff',
-  grayText: '#3f4953',
-  grayOne: '#cccccc',
+  black: '#191716',
+  brown: '#664e3d',
+  primary: '#0e9594',
+  grayText: '#413c3a',
+  grayOne: '#e8dfd9',
 }
 
 export const USERS = [

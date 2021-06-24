@@ -21,10 +21,11 @@ const Col = styled.div`
     max-width: 100%;
 `
 const Logo = styled(Col)`
-    color: ${COLORS.black}
+    color: ${COLORS.black};
     font-size: 1.5rem;
     font-weight: 500;
     svg {
+        color: ${COLORS.brown};
         margin-right: 10px;
     };
 `
@@ -37,7 +38,7 @@ const HeaderBar = ({ onClick }) => (
   <Header>
     <Logo>
       <FontAwesomeIcon icon={faHamburger} />
-      Bob&apos;s Burgers To Do
+      Belcher&apos;s To Do
     </Logo>
     <RightCol>
       <Button isIcon onClick={() => onClick(true)} />

@@ -7,7 +7,7 @@ import { COLORS } from '../../constants'
 
 const StyledButton = styled.button`
     background: transparent;
-    border: ${(props) => (props.primary ? '2px solid #237bff' : 'none')};
+    border: ${(props) => (props.primary ? `2px solid ${COLORS.primary}` : 'none')};
     border-radius: ${(props) => (props.isIcon ? '100%' : '3px')};
     width: ${(props) => (props.isIcon ? '45px' : '150px')};
     height: 45px;
